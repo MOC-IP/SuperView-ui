@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user/user.service';
 declare var M: any;
 declare var $: any;
 @Component({
@@ -15,7 +16,7 @@ export class SideNavComponent implements OnInit {
     onOpen: function(el) { /* Do Stuff*/ }, // A function to be called when sideNav is opened
     onClose: function(el) { /* Do Stuff*/ }, // A function to be called when sideNav is closed
   };
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     const elem = document.querySelector('.sidenav');
