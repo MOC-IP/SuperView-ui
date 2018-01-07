@@ -2,19 +2,21 @@ import { Injectable } from '@angular/core';
 import { User } from '../../models/user';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
-
+declare var M: any;
 @Injectable()
 export class UserService {
   currentUser: User;
   constructor(private authService: AuthService, public router: Router) {
     this.currentUser = new User;
-   }
+  }
 
   create(user: User) {
     console.log(User);
   }
   authenticate(user: User) {
-    this.authService.login(user).subscribe(() => {
+    console.log('start login');
+    this.authService.login(user).subscribe(logged_user => {
+      console.log('here');
       if (this.authService.isLoggedIn) {
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
@@ -23,7 +25,11 @@ export class UserService {
         // Redirect the user
         this.router.navigate([redirect]);
       }
-    });
+    },
+      (err) => {
+        console.log(err);
+        M.toast({html: `${err.error.message}`, classes: 'rounded'});
+      });
   }
   invalidate() {
     this.authService.logout(this.currentUser);
