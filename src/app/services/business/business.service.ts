@@ -8,6 +8,9 @@ import { Business } from '../../models/business';
 export class BusinessService {
 
   constructor(private http: HttpClient) { }
+  // back_endpoint = 'http://localhost:8080';
+  // place_info = 'http://ec2-18-220-145-34.us-east-2.compute.amazonaws.com:8001';
+ 
   back_endpoint = 'http://ec2-18-220-145-34.us-east-2.compute.amazonaws.com:8000';
   place_info = 'http://ec2-18-220-145-34.us-east-2.compute.amazonaws.com:8001';
   getBusiness(id: string): Observable<Business> {
@@ -18,8 +21,8 @@ export class BusinessService {
     const url = `${this.place_info}/google/places?name=${place['name']}&city=Las Vegas`;
     return this.http.get<Business>(url);
   }
-  getSWOT(place: Object): Observable<any> {
-    const url = `${this.back_endpoint}/profile/${place['_id']}`;
+  getSWOT(place: Object, version: string): Observable<any> {
+    const url = `${this.back_endpoint}/${version}/profile/${place['_id']}`;
     return this.http.get<Business>(url);
   }
 }

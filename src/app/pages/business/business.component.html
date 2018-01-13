@@ -1,25 +1,26 @@
 <app-side-nav></app-side-nav>
 <div class="container">
-    <div *ngIf="isDataLoaded">
-        <h1>
-            {{place.name}}
-        </h1>
-        <div class="slider">
-            <ul class="slides">
-          <li #allTheseThings *ngFor ="let place_image of place_info.result.photos">
-            <!-- https://maps.googleapis.com/maps/api/place/photo?maxwidth=&photoreference=&key= -->
-            <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=512&photoreference={{place_image.photo_reference}}&key=AIzaSyASKxzBYOd4WcgvwAnebFN9vnlSYmWSGU0"> <!-- random image -->
-            <div class="caption center-align">
-              <h3>{{place_info?.result.name}}</h3>
-            </div>
-          </li>
-        </ul>
-      </div>
-      
-      <div class="row"> 
-        <div class="col s12">
-            <h2 class="center-align"> SWOT analysis</h2>
+  <div *ngIf="isDataLoaded">
+    <h1>
+      {{place.name}}
+    </h1>
+    <div class="slider">
+      <ul class="slides">
+        <li #allTheseThings *ngFor="let place_image of place_info.result.photos">
+          <!-- https://maps.googleapis.com/maps/api/place/photo?maxwidth=&photoreference=&key= -->
+          <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=2048&photoreference={{place_image.photo_reference}}&key=AIzaSyASKxzBYOd4WcgvwAnebFN9vnlSYmWSGU0">
+          <!-- random image -->
+          <div class="caption center-align">
+            <h3>{{place_info?.result.name}}</h3>
           </div>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="version == 'v1'">
+      <div class="row">
+        <div class="col s12">
+          <h2 class="center-align"> SWOT analysis</h2>
+        </div>
         <div class="col s6">
           <h3>Strengths</h3>
           <ul>
@@ -29,28 +30,106 @@
           </ul>
         </div>
         <div class="col s6">
-            <h3>Weaknesses</h3>
-            <ul>
-              <li *ngFor="let item of swot.bad_topic_labels">
-                {{item}}
-              </li>
-            </ul>
-          </div>
-          
-      </div>
+          <h3>Weaknesses</h3>
+          <ul>
+            <li *ngFor="let item of swot.bad_topic_labels">
+              {{item}}
+            </li>
+          </ul>
+        </div>
 
-      <agm-map [latitude]="place.latitude" [longitude]="place.longitude">
-          <agm-marker [latitude]="place.latitude" [longitude]="place.longitude"></agm-marker>
-          <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
-          [radius]="50000"
-          [fillColor]="'red'"
-          [circleDraggable]="true"
-          [editable]="true"
-          (dragEnd)="onCenterChange($event)"
-          (radiusChange)="onRadiusChange($event)">
+      </div>
+    </div>
+    <div *ngIf="version == 'v2'">
+      <div class="row">
+        <div class="col s12">
+          <h2 class="center-align"> SWOT analysis</h2>
+        </div>
+        <div class="col s6">
+          <h3>Strengths</h3>
+          <ul class="collapsible popout" data-collapsible="accordion">
+            <li *ngFor="let item of swot.strengths">
+              <div class="collapsible-header">
+                <i class="material-icons">trending_up</i> {{item.name}}</div>
+              <div class="collapsible-body">
+                <ul>
+                  <li>
+                    <ul>
+                      <li>
+                        <i class="material-icons">thumb_up</i>
+                        {{item.data.good_words[0].word}}
+                      </li>
+                      <li>
+                        <i class="material-icons">thumb_up</i>
+                        {{item.data.good_words[1].word}}
+                      </li>
+                      <li>
+                        <i class="material-icons">thumb_up</i>
+                        {{item.data.good_words[2].word}}
+                      </li>
+                      <li>
+                        <i class="material-icons">thumb_up</i>
+                        {{item.data.good_words[3].word}}
+                      </li>
+                      <li>
+                        <i class="material-icons">thumb_up</i>
+                        {{item.data.good_words[4].word}}
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col s6">
+          <h3>Weaknesses</h3>
+          <ul class="collapsible popout " data-collapsible="accordion">
+            <li *ngFor="let item of swot.weaknesses">
+              <div class="collapsible-header">
+                <i class="material-icons">trending_down</i> {{item.name}}</div>
+              <div class="collapsible-body">
+                <ul>
+                  <li>
+                    <ul>
+                      <li>
+                        <i class="material-icons">thumb_down</i>
+                        {{item.data.bad_words[0].word}}
+                      </li>
+                      <li>
+                        <i class="material-icons">thumb_down</i>
+                        {{item.data.bad_words[1].word}}
+                      </li>
+                      <li>
+                        <i class="material-icons">thumb_down</i>
+                        {{item.data.bad_words[2].word}}
+                      </li>
+                      <li>
+                        <i class="material-icons">thumb_down</i>
+                        {{item.data.bad_words[3].word}}
+                      </li>
+                      <li>
+                        <i class="material-icons">thumb_down</i>
+                        {{item.data.bad_words[4].word}}
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <agm-map [latitude]="place.latitude" [longitude]="place.longitude">
+      <agm-marker [latitude]="place.latitude" [longitude]="place.longitude"></agm-marker>
+      <agm-circle [latitude]="lat + 0.3" [longitude]="lng" [radius]="50000" [fillColor]="'red'" [circleDraggable]="true" [editable]="true"
+        (dragEnd)="onCenterChange($event)" (radiusChange)="onRadiusChange($event)">
       </agm-circle>
 
-        </agm-map>
-    </div>
-   
+    </agm-map>
+  </div>
+
 </div>

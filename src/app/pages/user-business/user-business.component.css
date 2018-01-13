@@ -1,0 +1,12 @@
+.card{
+    display: inline-block;
+    /* margin: 10px; */
+    overflow: visible !important;
+   }
+
+#box{
+    display: block;
+}
+.box-container{
+        position: relative;
+}

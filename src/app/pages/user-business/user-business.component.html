@@ -1,0 +1,37 @@
+<app-side-nav></app-side-nav>
+<div class="container">
+  <div *ngIf="isDataLoaded">
+    <h1 *ngIf="businesses.length == 0">
+      Sorry don't yet have your own business
+    </h1>
+    <div class="box-container">
+        <div id="box" *ngFor="let business of businesses">
+            <div class="col m5">
+              <div class="card hoverable">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=512&photoreference={{business.google_details.result.photos[0].photo_reference}}&key=AIzaSyASKxzBYOd4WcgvwAnebFN9vnlSYmWSGU0">
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4">{{business.name}}
+                    <i class="material-icons right">more_vert</i>
+                  </span>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4">{{business.name}}
+                    <i class="material-icons right">close</i>
+                  </span>
+                  <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                </div>
+                <div class="card-action">
+                  <a href="v1/business/{{business._id}}">SWOT analysis 1</a>
+                  <a href="v2/business/{{business._id}}">SWOT analysis 2</a>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+   
+
+  </div>
+
+</div>

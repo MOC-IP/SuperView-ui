@@ -16,13 +16,18 @@ import { BusinessComponent } from './pages/business/business.component';
 import { BusinessService } from './services/business/business.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
+import { UserBusinessComponent } from './pages/user-business/user-business.component';
+import { AuthInterceptor } from './interceptors/auth.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: '', component: AboutComponent, canActivate: [AuthGuard]},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'business/:id', component: BusinessComponent},
-  {path: 'register', component: RegisterComponent},
+  { path: 'v1/business/:id', component: BusinessComponent},
+  { path: 'v2/business/:id', component: BusinessComponent},
+  { path: 'register', component: RegisterComponent},
+  { path: 'me/business', component : UserBusinessComponent, canActivate: [AuthGuard]},
   { path: '**', component: PageNotFoundComponent }
 ];
 @NgModule({
@@ -34,7 +39,8 @@ const appRoutes: Routes = [
     LoginComponent,
     AboutComponent,
     RegisterComponent,
-    BusinessComponent
+    BusinessComponent,
+    UserBusinessComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes,
@@ -53,6 +59,11 @@ const appRoutes: Routes = [
     AuthGuard,
     BusinessService,
     HttpClient,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

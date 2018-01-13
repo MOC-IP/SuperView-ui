@@ -21,6 +21,13 @@
       <div class="row margin">
         <div class="input-field col s12">
           <i class="material-icons prefix">perm_identity</i>
+          <label class="center-align" for="user_fn">Please enter your full name</label>
+          <input id="user_fn" name="user_fn" type="text" [(ngModel)]="model.fullname">
+        </div>
+      </div>
+      <div class="row margin">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">perm_identity</i>
           <label class="center-align" for="userTB">Please chose a username</label>
           <input id="userTB" name="userTB" type="text" [(ngModel)]="model.username">
         </div>

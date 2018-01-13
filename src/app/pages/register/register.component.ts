@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
   }
   doRegister() {
     console.log('register:', this.model);
+    this.userService.create(this.model);
   }
 
 }
