@@ -12,9 +12,9 @@ export class AuthService {
   isLoggedIn = false;
   // URL where we redirect after logging in
   redirectUrl: string;
-  back_endpoint = 'http://127.0.0.1:8080';
+  // back_endpoint = 'http://127.0.0.1:8080';
   user: User = new User();
-  // back_endpoint = 'http://ec2-18-220-145-34.us-east-2.compute.amazonaws.com:8000';
+  back_endpoint = 'http://ec2-18-220-145-34.us-east-2.compute.amazonaws.com:8000';
   token: string;
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');

@@ -87,19 +87,16 @@
             <img class="circle responsive-img" src="assets/images/avatar/joker.jpg">
           </a>
           <a href="/home">
-            <span class="black-text name">John Doe</span>
+            <span class="black-text name">{{authService.user.fullName}}</span>
           </a>
           <a href="/home">
-            <span class="black-text email">jdandturk@gmail.com</span>
+            <span class="black-text email">{{authService.user.email}}</span>
           </a>
         </div>
       </li>
       <li>
         <a href="/home">
           <i class="material-icons">home</i>Home Page</a>
-      </li>
-      <li>
-        <a href="#!">Second Link</a>
       </li>
       <li>
         <div class="divider"></div>

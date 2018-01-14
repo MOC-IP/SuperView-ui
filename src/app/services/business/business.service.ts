@@ -9,8 +9,7 @@ export class BusinessService {
 
   constructor(private http: HttpClient) { }
   // back_endpoint = 'http://localhost:8080';
-  // place_info = 'http://ec2-18-220-145-34.us-east-2.compute.amazonaws.com:8001';
- 
+  // place_info = 'http://ec2-18-220-145-34.us-east-2.compute.amazonaws.com:8001'; 
   back_endpoint = 'http://ec2-18-220-145-34.us-east-2.compute.amazonaws.com:8000';
   place_info = 'http://ec2-18-220-145-34.us-east-2.compute.amazonaws.com:8001';
   getBusiness(id: string): Observable<Business> {

@@ -21,7 +21,6 @@ export class UserBusinessComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.authService.user);
     console.log('user have',
       this.authService.user.ownedBusinesses);
     this.fetch_data((err, data) => {
